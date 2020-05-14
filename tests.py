@@ -14,6 +14,21 @@ class TestCase(unittest.TestCase):
         expected = '11-29-1973'
         self.assertEqual(my_datetime(time), expected)
 
+    def test_time3(self):
+        time = 9876543210
+        expected = '12-22-2282'
+        self.assertEqual(my_datetime(time), expected)
+
+    def test_time4(self):
+        time = 1589429599
+        expected = '05-14-2020'
+        self.assertEqual(my_datetime(time), expected)
+
+    def test_time5(self):
+        time = 1232353451
+        expected = '01-19-2009'
+        self.assertEqual(my_datetime(time), expected)
+
     def test_leap1(self):
         year = 1972
         expected = True
