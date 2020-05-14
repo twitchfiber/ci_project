@@ -1,6 +1,8 @@
 def my_datetime(num_sec):
     months = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
 
+    epoch_year = 1970
+
     # Leap year: 29, Non-Leap: 28
     month_days = {
         "1": 31,
@@ -16,6 +18,9 @@ def my_datetime(num_sec):
         "11": 30,
         "12": 31
     }
+
+    if num_sec == 0:
+        return '01-01-1970'
 
 
 # Reference: https://en.wikipedia.org/wiki/Leap_year

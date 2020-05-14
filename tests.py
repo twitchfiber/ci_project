@@ -1,8 +1,13 @@
 import unittest
-from task import is_leapyear
+from task import is_leapyear, my_datetime
 
 
 class TestCase(unittest.TestCase):
+
+    def test_time1(self):
+        time = 0
+        expected = '01-01-1970'
+        self.assertEqual(my_datetime(0), '01-01-1970')
 
     def test_leap1(self):
         year = 1972
