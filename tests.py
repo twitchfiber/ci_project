@@ -59,6 +59,6 @@ class TestCase(unittest.TestCase):
         expected = False
         self.assertEqual(is_leapyear(year), expected)
 
-        
+
 if __name__ == '__main__':
     unittest.main()
