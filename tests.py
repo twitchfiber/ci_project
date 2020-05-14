@@ -7,7 +7,12 @@ class TestCase(unittest.TestCase):
     def test_time1(self):
         time = 0
         expected = '01-01-1970'
-        self.assertEqual(my_datetime(0), '01-01-1970')
+        self.assertEqual(my_datetime(time), expected)
+
+    def test_time2(self):
+        time = 123456789
+        expected = '11-29-1973'
+        self.assertEqual(my_datetime(time), expected)
 
     def test_leap1(self):
         year = 1972
