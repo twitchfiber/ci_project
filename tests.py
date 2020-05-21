@@ -1,5 +1,5 @@
 import unittest
-from task import is_leapyear, my_datetime
+from task import is_leapyear, my_datetime, conv_num
 
 
 class TestCase(unittest.TestCase):
@@ -58,6 +58,47 @@ class TestCase(unittest.TestCase):
         year = ''
         expected = False
         self.assertEqual(is_leapyear(year), expected)
+
+    def test_conv_num1(self):
+        num_str = '12345'
+        expected = 12345
+        self.assertEqual(conv_num(num_str), expected)
+
+    def test_conv_num2(self):
+        num_str = '0xAZ4'
+        expected = None
+        self.assertEqual(conv_num(num_str), expected)
+
+    def test_conv_num3(self):
+        num_str = '12345A'
+        expected = None
+        self.assertEqual(conv_num(num_str), expected)
+
+    def test_conv_num4(self):
+        num_str = '12.3.45'
+        expected = None
+        self.assertEqual(conv_num(num_str), expected)
+
+    def test_conv_num5(self):
+        num_str = '123.'
+        expected = 123.0
+        self.assertEqual(conv_num(num_str), expected)
+
+    def test_conv_num6(self):
+        num_str = '.45'
+        expected = 0.45
+        self.assertEqual(conv_num(num_str), expected)
+
+    def test_conv_num7(self):
+        num_str = '.45123440'
+        expected = 0.45123440
+        self.assertEqual(conv_num(num_str), expected)
+
+    def test_conv_num8(self):
+        num_str = '123.45'
+        expected = 123.45
+        self.assertEqual(conv_num(num_str), expected)
+
 
 
 if __name__ == '__main__':
