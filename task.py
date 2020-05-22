@@ -109,7 +109,8 @@ def conv_num(num_str):
     elif upper_num_str[0:3] == '-0X':
         return conv_hex(upper_num_str[3:]) * -1
 
-    return 1
+    # if we get here then the input isn't valid
+    return None
 
 
 def invalid_num(num_str):
