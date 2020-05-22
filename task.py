@@ -99,6 +99,9 @@ def conv_num(num_str):
 
 
 def handle_dec(upper_num_str, num_values):
+    """This helper function handles strings that
+    contain a decimal and returns a floating point
+    number"""
     # if num_str is a floating point with a decimal as the last char
     if upper_num_str[-1] == '.':
         return conv_int(upper_num_str[0:-1], num_values) + 0.0
