@@ -99,6 +99,35 @@ class TestCase(unittest.TestCase):
         expected = 123.45
         self.assertEqual(conv_num(num_str), expected)
 
+    def test_conv_num9(self):
+        num_str = '-123.'
+        expected = -123.0
+        self.assertEqual(conv_num(num_str), expected)
+
+    def test_conv_num10(self):
+        num_str = '-.45'
+        expected = -0.45
+        self.assertEqual(conv_num(num_str), expected)
+
+    def test_conv_num11(self):
+        num_str = '-.45'
+        expected = -0.45
+        self.assertEqual(conv_num(num_str), expected)
+
+    def test_conv_num12(self):
+        num_str = '-123.45'
+        expected = -123.45
+        self.assertEqual(conv_num(num_str), expected)
+
+    def test_conv_num13(self):
+        num_str = '0xAD4'
+        expected = 2772
+        self.assertEqual(conv_num(num_str), expected)
+
+    def test_conv_num14(self):
+        num_str = '-0xAD4'
+        expected = -2772
+        self.assertEqual(conv_num(num_str), expected)
 
 
 if __name__ == '__main__':

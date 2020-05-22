@@ -1,6 +1,7 @@
 import math
 import collections
 
+
 def my_datetime(num_sec):
     months = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10',
               '11', '12']
@@ -58,7 +59,8 @@ def is_leapyear(year):
 
 
 def conv_num(num_str):
-    """This function takes in a string and converts it into a base 10 number and returns it"""
+    """This function takes in a string and
+    converts it into a base 10 number and returns it"""
     # make string uppercase to make function case agnostic
     upper_num_str = num_str.upper()
 
@@ -66,7 +68,8 @@ def conv_num(num_str):
     if invalid_num(upper_num_str):
         return None
 
-    num_values = {'0': 0, '1': 1, '2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9, '-': '-'}
+    num_values = {'0': 0, '1': 1, '2': 2, '3': 3, '4': 4, '5': 5,
+                  '6': 6, '7': 7, '8': 8, '9': 9, '-': '-'}
 
     # count valid integers so we can compare with the len(num_str)
     valid_integers = 0
@@ -87,17 +90,31 @@ def conv_num(num_str):
     # if num_str is a floating point with a -. as the first two chars
     elif upper_num_str[0:2] == '-.':
         return (0.0 + conv_float(upper_num_str[2:], num_values)) * -1
-    # if num_str is a floating point that contains a decimal somewhere between the first and last char
+    # if num_str is a floating point that contains a
+    # decimal somewhere between the first and last char
     elif '.' in upper_num_str:
         decimal = upper_num_str.split('.')
         left_decimal = decimal[0]
         right_decimal = decimal[1]
-        return conv_int(left_decimal, num_values) + conv_float(right_decimal, num_values)
+        if upper_num_str[0] == '-':
+            return conv_int(left_decimal, num_values) \
+                   - conv_float(right_decimal, num_values)
+        else:
+            return conv_int(left_decimal, num_values) \
+                   + conv_float(right_decimal, num_values)
+
+    # hex conversions
+    if upper_num_str[0:2] == '0X':
+        return conv_hex(upper_num_str[2:])
+    elif upper_num_str[0:3] == '-0X':
+        return conv_hex(upper_num_str[3:]) * -1
+
     return 1
 
 
 def invalid_num(num_str):
-    """This helper function takes in the upper case version of num_str and checks for edge cases.
+    """This helper function takes in the upper case version
+    of num_str and checks for edge cases.
     It returns True if the num_str is invalid.
     """
     count = collections.Counter(num_str)
@@ -128,7 +145,7 @@ def invalid_num(num_str):
                 return True
 
     # if number is hex then it should only contain 0X123456789ABCDEF
-    valid_hex = '0X123456789ABCDEF'
+    valid_hex = '-0X123456789ABCDEF'
     if num_str[0:3] == '-0X' or num_str[0:2] == '0X':
         for char in num_str:
             if char not in valid_hex:
@@ -170,9 +187,10 @@ def conv_int(num_str, num_values):
 
 
 def conv_float(num_str, num_values):
-    """This helper function takes in a string containing only numbers that are
-    to the right of decimal point and returns a floating point representation of it"""
-
+    """This helper function takes in a string
+    containing only numbers that are
+    to the right of decimal point and returns
+    a floating point representation of it"""
     result = 0
 
     for i in range(len(num_str)):
@@ -181,6 +199,19 @@ def conv_float(num_str, num_values):
     return result
 
 
+def conv_hex(num_str):
+    """This helper function takes in a string containing hexadecimal numbers
+    and returns the integer representation of it"""
+    hex_dict = {'0': 0, '1': 1, '2': 2, '3': 3, '4': 4,
+                '5': 5, '6': 6, '7': 7, '8': 8, '9': 9,
+                'A': 10, 'B': 11, 'C': 12, 'D': 13,
+                'E': 14, 'F': 15}
+    result = 0
 
+    # reverse num_str to make processing hex numbers easier
+    reverse_num_str = num_str[::-1]
 
+    for i in range(len(reverse_num_str)):
+        result = hex_dict[reverse_num_str[i]] * pow(16, i) + result
 
+    return result
