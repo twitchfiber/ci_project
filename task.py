@@ -68,6 +68,9 @@ def conv_num(num_str):
     if invalid_num(upper_num_str):
         return None
 
+    if invalid_num_2(upper_num_str):
+        return None
+
     num_values = {'0': 0, '1': 1, '2': 2, '3': 3, '4': 4, '5': 5,
                   '6': 6, '7': 7, '8': 8, '9': 9, '-': '-'}
 
@@ -81,6 +84,21 @@ def conv_num(num_str):
     if valid_integers == len(upper_num_str):
         return conv_int(upper_num_str, num_values)
 
+    # if num_str contains a decimal, call handle_dec
+    if '.' in upper_num_str:
+        return handle_dec(upper_num_str, num_values)
+
+    # hex conversions
+    if upper_num_str[0:2] == '0X':
+        return conv_hex(upper_num_str[2:])
+    elif upper_num_str[0:3] == '-0X':
+        return conv_hex(upper_num_str[3:]) * -1
+
+    # if we get here then the input isn't valid
+    return None
+
+
+def handle_dec(upper_num_str, num_values):
     # if num_str is a floating point with a decimal as the last char
     if upper_num_str[-1] == '.':
         return conv_int(upper_num_str[0:-1], num_values) + 0.0
@@ -103,17 +121,33 @@ def conv_num(num_str):
             return conv_int(left_decimal, num_values) \
                    + conv_float(right_decimal, num_values)
 
-    # hex conversions
-    if upper_num_str[0:2] == '0X':
-        return conv_hex(upper_num_str[2:])
-    elif upper_num_str[0:3] == '-0X':
-        return conv_hex(upper_num_str[3:]) * -1
-
-    # if we get here then the input isn't valid
-    return None
-
 
 def invalid_num(num_str):
+    """This helper function takes in the upper case version
+    of num_str and checks for edge cases.
+    It returns True if the num_str is invalid.
+    """
+
+    # if number is hex then it should only contain 0X123456789ABCDEF
+    valid_hex = '-0X123456789ABCDEF'
+    if num_str[0:3] == '-0X' or num_str[0:2] == '0X':
+        for char in num_str:
+            if char not in valid_hex:
+                return True
+    # if there are no numbers then it is invalid
+    num_numbers = 0
+    digits = '0123456789'
+    for char in num_str:
+        if char in digits:
+            num_numbers = num_numbers + 1
+    if num_numbers < 1:
+        return True
+
+    # if we get here then the num_str is valid
+    return False
+
+
+def invalid_num_2(num_str):
     """This helper function takes in the upper case version
     of num_str and checks for edge cases.
     It returns True if the num_str is invalid.
@@ -144,24 +178,6 @@ def invalid_num(num_str):
         for char in num_str:
             if char.isalpha():
                 return True
-
-    # if number is hex then it should only contain 0X123456789ABCDEF
-    valid_hex = '-0X123456789ABCDEF'
-    if num_str[0:3] == '-0X' or num_str[0:2] == '0X':
-        for char in num_str:
-            if char not in valid_hex:
-                return True
-    # if there are no numbers then it is invalid
-    num_numbers = 0
-    digits = '0123456789'
-    for char in num_str:
-        if char in digits:
-            num_numbers = num_numbers + 1
-    if num_numbers < 1:
-        return True
-
-    # if we get here then the num_str is valid
-    return False
 
 
 def conv_int(num_str, num_values):
