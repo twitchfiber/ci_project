@@ -41,12 +41,19 @@ def my_datetime(num_sec):
     num_days = num_sec / 86400.0
 
     current_year = 1970
-    while num_days >= 365:
-        if is_leapyear(current_year):
-            num_days -= 366
+
+    year_found = False
+    while year_found is False:
+        current_year_is_leap = is_leapyear(current_year)
+        if current_year_is_leap:
+            days_in_year = 366
         else:
-            num_days -= 365
-        current_year += 1
+            days_in_year = 365
+        if num_days > days_in_year:
+            num_days -= days_in_year
+            current_year += 1
+        else:
+            year_found = True
 
     i = 0
     current_year_is_leap = is_leapyear(current_year)
