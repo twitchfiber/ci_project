@@ -44,6 +44,41 @@ class TestCase(unittest.TestCase):
         expected = '01-02-1970'
         self.assertEqual(my_datetime(time), expected)
 
+    def test_time9(self):
+        time = 347080258
+        expected = '12-31-1980'
+        self.assertEqual(my_datetime(time), expected)
+
+    def test_time10(self):
+        time = 347166658
+        expected = '01-01-1981'
+        self.assertEqual(my_datetime(time), expected)
+
+    def test_time11(self):
+        time = 1582945858
+        expected = '02-29-2020'
+        self.assertEqual(my_datetime(time), expected)
+
+    def test_time12(self):
+        time = 1583032258
+        expected = '03-01-2020'
+        self.assertEqual(my_datetime(time), expected)
+
+    def test_time13(self):
+        time = 1582859458
+        expected = '02-28-2020'
+        self.assertEqual(my_datetime(time), expected)
+
+    def test_time14(self):
+        time = 883527358
+        expected = '12-31-1997'
+        self.assertEqual(my_datetime(time), expected)
+
+    def test_time15(self):
+        time = 883613758
+        expected = '01-01-1998'
+        self.assertEqual(my_datetime(time), expected)
+
     def test_leap1(self):
         year = 1972
         expected = True
