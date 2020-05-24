@@ -43,7 +43,7 @@ def my_datetime(num_sec):
             num_days -= month_days[months[i]]
         i += 1
 
-    return '-'.join([str(months[i]), str(math.ceil(num_days)),
+    return '-'.join([str(months[i]), (str(math.ceil(num_days)).zfill(2)),
                      str(current_year)])
 
 
