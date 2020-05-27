@@ -179,6 +179,31 @@ class TestCase(unittest.TestCase):
         expected = -2772
         self.assertEqual(conv_num(num_str), expected)
 
+    def test_conv_num15(self):
+        num_str = 'hello'
+        expected = None
+        self.assertEqual(conv_num(num_str), expected)
+
+    def test_conv_num16(self):
+        num_str = '-0xad4'
+        expected = -2772
+        self.assertEqual(conv_num(num_str), expected)
+
+    def test_conv_num17(self):
+        num_str = '1FF'
+        expected = None
+        self.assertEqual(conv_num(num_str), expected)
+
+    def test_conv_num18(self):
+        num_str = ''
+        expected = None
+        self.assertEqual(conv_num(num_str), expected)
+
+    def test_conv_num19(self):
+        num_str = [1, 2, 3]
+        expected = None
+        self.assertEqual(conv_num(num_str), expected)
+
 
 if __name__ == '__main__':
     unittest.main()
