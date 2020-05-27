@@ -61,6 +61,10 @@ def is_leapyear(year):
 def conv_num(num_str):
     """This function takes in a string and
     converts it into a base 10 number and returns it"""
+    #return None if num_str is not a string
+    if not isinstance(num_str, str):
+        return None
+
     # make string uppercase to make function case agnostic
     upper_num_str = num_str.upper()
 
