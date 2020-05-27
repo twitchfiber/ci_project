@@ -204,5 +204,6 @@ class TestCase(unittest.TestCase):
         expected = None
         self.assertEqual(conv_num(num_str), expected)
 
+
 if __name__ == '__main__':
     unittest.main()
