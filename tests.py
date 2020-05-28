@@ -209,5 +209,10 @@ class TestCase(unittest.TestCase):
         expected = '0E 91 A2'
         self.assertEqual(conv_endian(num), expected)
 
+    def test_conv_endian2(self):
+        num = 954786
+        expected = '0E 91 A2'
+        self.assertEqual(conv_endian(num, 'big'), expected)
+
 if __name__ == '__main__':
     unittest.main()

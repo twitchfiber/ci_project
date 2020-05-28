@@ -335,6 +335,7 @@ def conv_endian(num, endian='big'):
     result = ""
     result_found = False
 
+    # build result byte by byte
     while result_found is False:
         half_byte1 = dec_to_hex[remaining % 16]
         remaining //= 16
