@@ -352,6 +352,8 @@ def conv_endian(num, endian="big"):
                 result = new_byte + " " + result
             elif endian == "little":
                 result = result + " " + new_byte
+            else:
+                return None
 
         # determine whether we can stop yet
         if remaining == 0:
