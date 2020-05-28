@@ -309,6 +309,9 @@ def conv_hex(num_str):
 
 
 def conv_endian(num, endian="big"):
+    if endian != "big" and endian != "little":
+        return None
+
     dec_to_hex = {
         0: '0',
         1: '1',
@@ -357,10 +360,8 @@ def conv_endian(num, endian="big"):
         else:
             if endian == "big":
                 result = new_byte + " " + result
-            elif endian == "little":
+            else:  # ending == "little
                 result = result + " " + new_byte
-            else:
-                return None
 
         # determine whether we can stop yet
         if remaining == 0:
