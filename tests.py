@@ -1,5 +1,5 @@
 import unittest
-from task import is_leapyear, my_datetime, conv_num
+from task import is_leapyear, my_datetime, conv_num, conv_endian
 
 
 class TestCase(unittest.TestCase):
@@ -205,8 +205,8 @@ class TestCase(unittest.TestCase):
         self.assertEqual(conv_num(num_str), expected)
 
     def test_conv_endian1(self):
-        num_str = 954786
-        expected = None
+        num = 954786
+        expected = '0E 91 A2'
         self.assertEqual(conv_endian(num), expected)
 
 if __name__ == '__main__':

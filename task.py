@@ -278,7 +278,7 @@ def conv_float(num_str, num_values):
 def conv_hex(num_str):
     """This helper function takes in a string containing hexadecimal numbers
     and returns the integer representation of it"""
-    hex_dict = {
+    hex_to_dec = {
         '0': 0,
         '1': 1,
         '2': 2,
@@ -303,9 +303,49 @@ def conv_hex(num_str):
     reverse_num_str = num_str[::-1]
 
     for i in range(len(reverse_num_str)):
-        result = hex_dict[reverse_num_str[i]] * pow(16, i) + result
+        result = hex_to_dec[reverse_num_str[i]] * pow(16, i) + result
 
     return result
 
-def conv_endian(num, endian = 'big'):
-    pass
+
+def conv_endian(num, endian='big'):
+    dec_to_hex = {
+        0: '0',
+        1: '1',
+        2: '2',
+        3: '3',
+        4: '4',
+        5: '5',
+        6: '6',
+        7: '7',
+        8: '8',
+        9: '9',
+        10: 'A',
+        11: 'B',
+        12: 'C',
+        13: 'D',
+        14: 'E',
+        15: 'F'
+    }
+
+    # start with the entire value of num remaining to be converted to hex
+    remaining = num
+
+    # result starts as an empty string
+    result = ""
+    result_found = False
+
+    while result_found is False:
+        half_byte1 = dec_to_hex[remaining % 16]
+        remaining //= 16
+        half_byte2 = dec_to_hex[remaining % 16]
+        remaining //= 16
+        new_byte = str(half_byte2) + str(half_byte1)
+        if result == "":
+            result = new_byte
+        else:
+            result = new_byte + " " + result
+        if remaining == 0:
+            result_found = True
+
+    return result
