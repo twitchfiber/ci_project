@@ -306,3 +306,6 @@ def conv_hex(num_str):
         result = hex_dict[reverse_num_str[i]] * pow(16, i) + result
 
     return result
+
+def conv_endian(num, endian = 'big'):
+    pass
