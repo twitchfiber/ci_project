@@ -308,7 +308,7 @@ def conv_hex(num_str):
     return result
 
 
-def conv_endian(num, endian='big'):
+def conv_endian(num, endian="big"):
     dec_to_hex = {
         0: '0',
         1: '1',
@@ -337,15 +337,23 @@ def conv_endian(num, endian='big'):
 
     # build result byte by byte
     while result_found is False:
+        # find next hex byte to add
         half_byte1 = dec_to_hex[remaining % 16]
         remaining //= 16
         half_byte2 = dec_to_hex[remaining % 16]
         remaining //= 16
         new_byte = str(half_byte2) + str(half_byte1)
+
+        # add byte to result
         if result == "":
             result = new_byte
         else:
-            result = new_byte + " " + result
+            if endian == "big":
+                result = new_byte + " " + result
+            elif endian == "little":
+                result = result + " " + new_byte
+
+        # determine whether we can stop yet
         if remaining == 0:
             result_found = True
 
