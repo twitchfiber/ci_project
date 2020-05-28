@@ -331,6 +331,13 @@ def conv_endian(num, endian="big"):
     # start with the entire value of num remaining to be converted to hex
     remaining = num
 
+    # check for negative input
+    if num < 0:
+        negative = True
+        remaining *= -1
+    else:
+        negative = False
+
     # result starts as an empty string
     result = ""
     result_found = False
@@ -358,5 +365,9 @@ def conv_endian(num, endian="big"):
         # determine whether we can stop yet
         if remaining == 0:
             result_found = True
+
+            # add negative sign if needed
+            if negative is True:
+                result = "-" + result
 
     return result
