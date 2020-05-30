@@ -1,5 +1,5 @@
 import unittest
-from task import is_leapyear, my_datetime, conv_num
+from task import is_leapyear, my_datetime, conv_num, conv_endian
 
 
 class TestCase(unittest.TestCase):
@@ -203,6 +203,151 @@ class TestCase(unittest.TestCase):
         num_str = [1, 2, 3]
         expected = None
         self.assertEqual(conv_num(num_str), expected)
+
+    def test_conv_endian1(self):
+        num = 954786
+        expected = '0E 91 A2'
+        self.assertEqual(conv_endian(num), expected)
+
+    def test_conv_endian2(self):
+        num = 954786
+        expected = '0E 91 A2'
+        self.assertEqual(conv_endian(num, 'big'), expected)
+
+    def test_conv_endian3(self):
+        num = 954786
+        expected = 'A2 91 0E'
+        self.assertEqual(conv_endian(num, 'little'), expected)
+
+    def test_conv_endian4(self):
+        num = 954786
+        expected = None
+        self.assertEqual(conv_endian(num, 'hello'), expected)
+
+    def test_conv_endian5(self):
+        num = -954786
+        expected = '-0E 91 A2'
+        self.assertEqual(conv_endian(num), expected)
+
+    def test_conv_endian6(self):
+        num = -954786
+        expected = '-A2 91 0E'
+        self.assertEqual(conv_endian(num, 'little'), expected)
+
+    def test_conv_endian7(self):
+        num = 0
+        expected = '00'
+        self.assertEqual(conv_endian(num, 'little'), expected)
+
+    def test_conv_endian8(self):
+        num = 0
+        expected = '00'
+        self.assertEqual(conv_endian(num, 'big'), expected)
+
+    def test_conv_endian9(self):
+        num = 0
+        expected = '00'
+        self.assertEqual(conv_endian(num), expected)
+
+    def test_conv_endian10(self):
+        num = 87
+        expected = '57'
+        self.assertEqual(conv_endian(num, 'little'), expected)
+
+    def test_conv_endian11(self):
+        num = 87
+        expected = '57'
+        self.assertEqual(conv_endian(num, 'big'), expected)
+
+    def test_conv_endian12(self):
+        num = 87
+        expected = '57'
+        self.assertEqual(conv_endian(num), expected)
+
+    def test_conv_endian13(self):
+        num = -87
+        expected = '-57'
+        self.assertEqual(conv_endian(num, 'little'), expected)
+
+    def test_conv_endian14(self):
+        num = -87
+        expected = '-57'
+        self.assertEqual(conv_endian(num, 'big'), expected)
+
+    def test_conv_endian15(self):
+        num = -87
+        expected = '-57'
+        self.assertEqual(conv_endian(num), expected)
+
+    def test_conv_endian16(self):
+        num = 9000
+        expected = '28 23'
+        self.assertEqual(conv_endian(num, 'little'), expected)
+
+    def test_conv_endian17(self):
+        num = 9000
+        expected = '23 28'
+        self.assertEqual(conv_endian(num, 'big'), expected)
+
+    def test_conv_endian18(self):
+        num = 9000
+        expected = '23 28'
+        self.assertEqual(conv_endian(num), expected)
+
+    def test_conv_endian19(self):
+        num = -9000
+        expected = '-28 23'
+        self.assertEqual(conv_endian(num, 'little'), expected)
+
+    def test_conv_endian20(self):
+        num = -9000
+        expected = '-23 28'
+        self.assertEqual(conv_endian(num, 'big'), expected)
+
+    def test_conv_endian21(self):
+        num = -9000
+        expected = '-23 28'
+        self.assertEqual(conv_endian(num), expected)
+
+    def test_conv_endian22(self):
+        num = 1234567
+        expected = '87 D6 12'
+        self.assertEqual(conv_endian(num, 'little'), expected)
+
+    def test_conv_endian23(self):
+        num = 1234567
+        expected = '12 D6 87'
+        self.assertEqual(conv_endian(num, 'big'), expected)
+
+    def test_conv_endian24(self):
+        num = 1234567
+        expected = '12 D6 87'
+        self.assertEqual(conv_endian(num), expected)
+
+    def test_conv_endian25(self):
+        num = -1234567
+        expected = '-87 D6 12'
+        self.assertEqual(conv_endian(num, 'little'), expected)
+
+    def test_conv_endian26(self):
+        num = -1234567
+        expected = '-12 D6 87'
+        self.assertEqual(conv_endian(num, 'big'), expected)
+
+    def test_conv_endian27(self):
+        num = -1234567
+        expected = '-12 D6 87'
+        self.assertEqual(conv_endian(num), expected)
+
+    def test_conv_endian28(self):
+        num = -1234567
+        expected = None
+        self.assertEqual(conv_endian(num, 'false'), expected)
+
+    def test_conv_endian29(self):
+        num = 0
+        expected = None
+        self.assertEqual(conv_endian(num, 'goodbye'), expected)
 
 
 if __name__ == '__main__':
