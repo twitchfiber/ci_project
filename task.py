@@ -50,21 +50,27 @@ def my_datetime(num_sec):
             days_in_year = 366
         else:
             days_in_year = 365
-        if num_days > days_in_year:
+
+        if num_days >= days_in_year:
             num_days -= days_in_year
             current_year += 1
         else:
             year_found = True
 
-    i = 0
     current_year_is_leap = is_leapyear(current_year)
     if current_year_is_leap:
         month_days = month_days_leap
     else:
         month_days = month_days_standard
+
+    i = 0
     while num_days >= month_days[months[i]]:
         num_days -= month_days[months[i]]
         i += 1
+
+    # This takes care of edge case where we need to round up at whole numbers
+    if num_days % 1 == 0:
+        num_days += 0.1
 
     return '-'.join([str(months[i]), (str(math.ceil(num_days)).zfill(2)),
                      str(current_year)])
