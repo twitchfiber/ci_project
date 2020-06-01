@@ -94,6 +94,31 @@ class TestCase(unittest.TestCase):
         expected = '01-01-2022'
         self.assertEqual(my_datetime(time), expected)
 
+    def test_time19(self):
+        time = 4115498286
+        expected = '06-01-2100'
+        self.assertEqual(my_datetime(time), expected)
+
+    def test_time20(self):
+        time = 13582605486
+        expected = '06-01-2400'
+        self.assertEqual(my_datetime(time), expected)
+
+    def test_time21(self):
+        time = 13574570286
+        expected = '02-29-2400'
+        self.assertEqual(my_datetime(time), expected)
+
+    def test_time22(self):
+        time = 13574656686
+        expected = '03-01-2400'
+        self.assertEqual(my_datetime(time), expected)
+
+    def test_time23(self):
+        time = 10445248686
+        expected = '12-31-2300'
+        self.assertEqual(my_datetime(time), expected)
+
     def test_leap1(self):
         year = 1972
         expected = True
@@ -231,6 +256,31 @@ class TestCase(unittest.TestCase):
 
     def test_conv_num19(self):
         num_str = [1, 2, 3]
+        expected = None
+        self.assertEqual(conv_num(num_str), expected)
+
+    def test_conv_num20(self):
+        num_str = '0x'
+        expected = None
+        self.assertEqual(conv_num(num_str), expected)
+
+    def test_conv_num21(self):
+        num_str = '.25.'
+        expected = None
+        self.assertEqual(conv_num(num_str), expected)
+
+    def test_conv_num22(self):
+        num_str = '-0x'
+        expected = None
+        self.assertEqual(conv_num(num_str), expected)
+
+    def test_conv_num23(self):
+        num_str = '0xA'
+        expected = 10
+        self.assertEqual(conv_num(num_str), expected)
+
+    def test_conv_num24(self):
+        num_str = (1, 2, 3)
         expected = None
         self.assertEqual(conv_num(num_str), expected)
 

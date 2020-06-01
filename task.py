@@ -189,6 +189,9 @@ def invalid_hex(num_str):
     if num_str is a string that only
     contains values in the valid_hex
     set"""
+    # these aren't valid numbers just valid prefixes
+    if num_str == '-0X' or num_str == '0X':
+        return True
     # if number is hex then it should only contain 0X123456789ABCDEF
     valid_hex = set('-0X123456789ABCDEF')
     if num_str[0:3] == '-0X' or num_str[0:2] == '0X':
